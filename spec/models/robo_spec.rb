@@ -57,4 +57,11 @@ RSpec.describe Robo, type: :model do
       end
     end
   end
+
+  describe '#report' do
+    let(:robo) { Robo.new(x: 1, y: 1, f: 'NORTH') }
+    it 'does return position and direction' do
+      expect(robo.report).to eq('1, 1, NORTH')
+    end
+  end
 end

@@ -8,7 +8,9 @@ class Robo
     @f = f
   end
 
-  def report; end
+  def report
+    "#{@x}, #{@y}, #{@f}"
+  end
 
   def turn(direction)
     current_index = DIRECTIONS.index(@f)
