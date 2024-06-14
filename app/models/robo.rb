@@ -5,8 +5,8 @@ class Robo < RedisApplication
   def initialize(id:, x:, y:, f:)
     super()
     @id = id
-    @x = x
-    @y = y
+    @x = x.to_i
+    @y = y.to_i
     self.f = f
   end
 
@@ -31,6 +31,11 @@ class Robo < RedisApplication
 
     @f = value
     update(@id, to_hash)
+  end
+
+  def self.get(id)
+    robo = super(id)
+    Robo.new(robo)
   end
 
   def to_hash
