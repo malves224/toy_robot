@@ -1,8 +1,9 @@
-class Robo
+class Robo < RedisApplication
   DIRECTIONS = %w[NORTH EAST SOUTH WEST]
-  attr_accessor :x, :y, :f
+  attr_accessor :id, :x, :y, :f
 
-  def initialize(x:, y:, f:)
+  def initialize(id:, x:, y:, f:)
+    @id = id
     @x = x
     @y = y
     @f = f
@@ -12,14 +13,31 @@ class Robo
     "#{@x}, #{@y}, #{@f}"
   end
 
-  def turn(direction)
-    current_index = DIRECTIONS.index(@f)
-    new_index = if direction == 'LEFT'
-                  current_index - 1
-                elsif direction == 'RIGHT'
-                  current_index + 1
-                end
+  def x=(value)
+    @x = value
+    update(@id, to_hash)
+  end
 
-    @f = DIRECTIONS[new_index % DIRECTIONS.size]
+  def y=(value)
+    @y = value
+    update(@id, to_hash)
+  end
+
+  def f=(value)
+    unless DIRECTIONS.include?(value)
+      raise ArgumentError, "Invalid direction '#{value}'. Allowed values are: #{DIRECTIONS.join(', ')}"
+    end
+
+    @f = value
+    update(@id, to_hash)
+  end
+
+  def to_hash
+    {
+      id: @id,
+      x: @x,
+      y: @y,
+      f: @f
+    }
   end
 end
