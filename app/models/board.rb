@@ -13,10 +13,6 @@ class Board < RedisApplication
     create(robo)
   end
 
-  def remove_robo(robo_id)
-    remove(robo_id)
-  end
-
   def turn_robot(robo, direction)
     current_index = @directions.index(robo.f)
     new_index = if direction == 'LEFT'
@@ -26,6 +22,7 @@ class Board < RedisApplication
                 end
 
     robo&.f = @directions[new_index % @directions.size]
+    robo.to_hash
   end
 
   def move(robo)
@@ -37,5 +34,24 @@ class Board < RedisApplication
 
     robo.x += x if (x + robo.x).between?(1, @size)
     robo.y += y if (y + robo.y).between?(1, @size)
+    robo.to_hash
+  end
+
+  def left(robo)
+    turn_robot(robo, 'LEFT')
+  end
+
+  def right(robo)
+    turn_robot(robo, 'RIGHT')
+  end
+
+  def report(robo)
+    robo.to_hash
+  end
+
+  def place(id, x, y, f)
+    robo = Robo.new(id: id, x: x, y: y, f: f)
+    add_robo(robo)
+    robo
   end
 end
