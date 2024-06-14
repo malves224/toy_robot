@@ -95,4 +95,75 @@ RSpec.describe Board, type: :model do
       end
     end
   end
+
+  describe '#move' do
+    context "when it's to the north" do
+      before do
+        robo.f = 'NORTH'
+      end
+
+      it 'does moves a robo' do
+        board.move(robo)
+        expect(robo.y).to eq(2)
+      end
+    end
+
+    context "when it's to the EAST" do
+      before do
+        robo.f = 'EAST'
+      end
+
+      it 'does moves a robo' do
+        board.move(robo)
+        expect(robo.x).to eq(2)
+      end
+    end
+
+    context "when it's to the SOUTH" do
+      before do
+        robo.f = 'SOUTH'
+        robo.y = 2
+      end
+
+      it 'does moves a robo' do
+        board.move(robo)
+        expect(robo.y).to eq(1)
+      end
+    end
+
+    context "when it's to the WEST" do
+      before do
+        robo.f = 'WEST'
+        robo.x = 2
+      end
+
+      it 'does moves a robo' do
+        board.move(robo)
+        expect(robo.x).to eq(1)
+      end
+    end
+
+    context 'when y position is negative' do
+      before do
+        robo.f = 'WEST'
+      end
+
+      it 'does maintain position' do
+        board.move(robo)
+        expect(robo.x).to eq(1)
+      end
+    end
+
+    context 'when y position is bigger than the size of the board' do
+      before do
+        robo.f = 'NORTH'
+        robo.y = board.size
+      end
+
+      it 'does maintain position' do
+        board.move(robo)
+        expect(robo.y).to eq(board.size)
+      end
+    end
+  end
 end

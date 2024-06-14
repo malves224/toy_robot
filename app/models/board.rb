@@ -2,6 +2,7 @@ class Board < RedisApplication
   attr_accessor :robots, :size, :directions
 
   def initialize(size:, directions: %w[NORTH EAST SOUTH WEST])
+    super()
     @size = size
     @directions = directions
   end
@@ -25,5 +26,16 @@ class Board < RedisApplication
                 end
 
     robo&.f = @directions[new_index % @directions.size]
+  end
+
+  def move(robo)
+    movements = {
+      'NORTH' => [0, 1], 'EAST' => [1, 0], 'SOUTH' => [0, -1], 'WEST' => [-1, 0]
+    }
+
+    x, y = movements[robo.f]
+
+    robo.x += x if (x + robo.x).between?(1, @size)
+    robo.y += y if (y + robo.y).between?(1, @size)
   end
 end
