@@ -3,7 +3,7 @@ require 'redis'
 
 RSpec.describe Board, type: :model do
   let(:board) { described_class.new(size: 5) }
-  let(:redis) { Redis.current }
+  let(:redis) { Redis.new(url: ENV['REDIS_URL'] || 'redis://localhost:6379') }
   let(:robo) { Robo.new(id: 'robo1', x: 1, y: 1, f: 'NORTH') }
 
   before(:each) do

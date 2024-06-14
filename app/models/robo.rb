@@ -3,10 +3,11 @@ class Robo < RedisApplication
   attr_accessor :id, :x, :y, :f
 
   def initialize(id:, x:, y:, f:)
+    super()
     @id = id
     @x = x
     @y = y
-    @f = f
+    self.f = f
   end
 
   def report
