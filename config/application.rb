@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +23,12 @@ module ToyRobot
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.eager_load_paths << Rails.root.join('lib')
+    config.after_initialize do
+      Thread.new do
+        tcp_server = TcpServerGame.new(5001)
+        tcp_server.run
+      end
+    end
   end
 end
