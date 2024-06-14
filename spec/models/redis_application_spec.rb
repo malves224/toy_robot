@@ -8,7 +8,7 @@ RSpec.describe RedisApplication, type: :model do
   let(:attrs) { double('Attrs', id: '123', to_hash: { 'a' => 1, 'b' => 2 }) }
 
   before do
-    allow(Redis).to receive(:current).and_return(redis)
+    allow(Redis).to receive(:new).and_return(redis)
   end
 
   let(:redis) { instance_double(Redis) }
