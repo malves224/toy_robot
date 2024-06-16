@@ -30,7 +30,7 @@ class CommandProcessorService
     action = message.downcase.to_sym
     if @board.respond_to?(action)
       @board.send(action, robo)
-      robo.to_json
+      robo.to_json unless action == 'report'
     else
       'Unknown command.'
     end
