@@ -27,10 +27,10 @@ RSpec.describe RedisApplication, type: :model do
     end
   end
 
-  describe '#get' do
+  describe '.get' do
     it 'retrieves hash values from Redis and transforms keys to symbols' do
       allow(redis).to receive(:hgetall).with('test_key').and_return('a' => '1', 'b' => '2')
-      expect(redis_app.get('test_key')).to eq({ a: '1', b: '2' })
+      expect(described_class.get('test_key')).to eq({ a: '1', b: '2' })
     end
   end
 
