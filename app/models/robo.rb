@@ -34,7 +34,7 @@ class Robo < RedisApplication
   end
 
   def self.get(id)
-    Robo.new(super(id))
+    new(super(id))
   end
 
   def to_hash
