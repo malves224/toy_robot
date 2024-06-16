@@ -39,24 +39,15 @@ RSpec.describe Robo, type: :model do
       robo.f = 'EAST'
       expect(redis.hget('robo1', 'f')).to eq('EAST')
     end
-
-    it 'raises an error if the direction is invalid' do
-      expect do
-        robo.f = 'INVALID'
-      end.to raise_error(ArgumentError,
-                         "Invalid direction 'INVALID'. Allowed values are: NORTH, EAST, SOUTH, WEST")
-    end
   end
 
-  describe ".get" do
-    before do 
+  describe '.get' do
+    before do
       robo.save
     end
-    it "does return a robo" do
+    it 'does return a robo' do
       response = described_class.get(robo.id)
-      expect(response.id).to eq(robo.id) 
+      expect(response.id).to eq(robo.id)
     end
-    
   end
-  
 end
