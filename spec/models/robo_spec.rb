@@ -47,4 +47,16 @@ RSpec.describe Robo, type: :model do
                          "Invalid direction 'INVALID'. Allowed values are: NORTH, EAST, SOUTH, WEST")
     end
   end
+
+  describe ".get" do
+    before do 
+      robo.save
+    end
+    it "does return a robo" do
+      response = described_class.get(robo.id)
+      expect(response.id).to eq(robo.id) 
+    end
+    
+  end
+  
 end

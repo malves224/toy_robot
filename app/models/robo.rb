@@ -33,9 +33,12 @@ class Robo < RedisApplication
     update(@id, to_hash)
   end
 
+  def save
+    create(self)
+  end
+
   def self.get(id)
-    robo = super(id)
-    Robo.new(robo)
+    Robo.new(super(id))
   end
 
   def to_hash
