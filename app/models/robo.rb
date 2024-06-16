@@ -1,6 +1,6 @@
 class Robo < RedisApplication
-  DIRECTIONS = %w[NORTH EAST SOUTH WEST]
-  attr_accessor :id, :x, :y, :f
+  attr_accessor :id
+  attr_reader :x, :y, :f
 
   def initialize(id:, x:, y:, f:)
     super()
@@ -25,10 +25,6 @@ class Robo < RedisApplication
   end
 
   def f=(value)
-    unless DIRECTIONS.include?(value)
-      raise ArgumentError, "Invalid direction '#{value}'. Allowed values are: #{DIRECTIONS.join(', ')}"
-    end
-
     @f = value
     update(@id, to_hash)
   end
