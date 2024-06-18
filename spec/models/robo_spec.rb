@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Robo, type: :model do
-  let(:redis) { Redis.new(url: ENV['REDIS_URL'] || 'redis://localhost:6379') }
+  let(:redis) { Redis.new(url: ENV['REDIS_URL'] || 'redis://localhost:6379/1') }
   let(:robo) { Robo.new(id: 'robo1', x: 1, y: 1, f: 'NORTH') }
 
   before(:each) do
