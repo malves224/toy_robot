@@ -1,6 +1,6 @@
 class RedisApplication
   def initialize
-    @redis = self.class.redis_instance
+    @redis = Redis.new(url: ENV['REDIS_URL'] || 'redis://localhost:6379/1')
   end
 
   def create(attrs)
