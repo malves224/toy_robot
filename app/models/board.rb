@@ -1,5 +1,5 @@
 class Board < RedisApplication
-  attr_accessor :robots, :size, :directions
+  attr_accessor :size, :directions
 
   def initialize(size:, directions: %w[NORTH EAST SOUTH WEST])
     super()
