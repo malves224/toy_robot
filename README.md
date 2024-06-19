@@ -1,24 +1,21 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+# TOY ROBOT Simulator
+A robot simulator where you can navigate a platform together with your friends.
 
-* Ruby version
+## Client Side
 
-* System dependencies
+### CLI
+You can connect via TCP and navigate using the CLI:
+``telnet 159.65.236.207 5001``
+### Front End
+![Interface](public/print.png)
 
-* Configuration
+You can navigate through the interface at:
+http://159.65.236.207:8080/
 
-* Database creation
+To set an image, place it in public/print.png in the same directory.
 
-* Database initialization
+### Bonus - Multiplayer
+Invite your friends to navigate with you! Yes, it's possible to play online together!
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
