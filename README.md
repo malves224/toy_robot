@@ -9,7 +9,7 @@ A robot simulator where you can navigate a platform together with your friends.
 You can connect via TCP and navigate using the CLI:
 ``telnet 159.65.236.207 5001``
 #### Commands
-- PLACE X,Y,F - Start the robot at the given coordinates, ex: PLACE 1 1 NORTH
+- PLACE X Y F - Start the robot at the given coordinates, ex: PLACE 1 1 NORTH
 - MOVE - Moves in the direction of the robot
 - LEFT - Rotate the robot 90º to the left
 - RIGHT  - Rotate the robot 90º to the right
