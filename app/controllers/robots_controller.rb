@@ -1,6 +1,6 @@
 class RobotsController < ApplicationController
   def index
 
-    render json: Robo.all
+    render json: Robot.all
   end
 end

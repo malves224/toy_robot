@@ -18,17 +18,17 @@ class TcpServerGame
   def handle_client(client)
     puts "Client connected: #{client.peeraddr.inspect}"
     client.puts 'Hello! You are connected to the server.'
-    robo = nil
+    robot = nil
     id = "#{client.peeraddr[2]}:#{client.peeraddr[1]}"
 
     while (message = client.gets)
-      output = @commander.call(id, message.strip, robo).data
+      output = @commander.call(id, message.strip, robot).data
       client.puts output
 
-      robo = Robo.get(id) if robo.nil?
+      robot = Robot.get(id) if robot.nil?
     end
 
-    @board.remove(robo.id) if robo
+    @board.remove(robot.id) if robot
     client.close
     puts 'Client disconnected.'
   end

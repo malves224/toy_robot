@@ -7,53 +7,53 @@ class Board < RedisApplication
     @directions = directions
   end
 
-  def move(robo)
+  def move(robot)
     movements = {
       'NORTH' => [0, 1], 'EAST' => [1, 0], 'SOUTH' => [0, -1], 'WEST' => [-1, 0]
     }
 
-    x, y = movements[robo.f]
+    x, y = movements[robot.f]
 
-    robo.x += x if (x + robo.x).between?(1, @size)
-    robo.y += y if (y + robo.y).between?(1, @size)
-    robo.to_hash
+    robot.x += x if (x + robot.x).between?(1, @size)
+    robot.y += y if (y + robot.y).between?(1, @size)
+    robot.to_hash
   end
 
-  def left(robo)
-    turn_robot(robo, 'LEFT')
+  def left(robot)
+    turn_robot(robot, 'LEFT')
   end
 
-  def right(robo)
-    turn_robot(robo, 'RIGHT')
+  def right(robot)
+    turn_robot(robot, 'RIGHT')
   end
 
-  def report(robo)
-    robo.to_json
+  def report(robot)
+    robot.to_json
   end
 
   def place(id, x, y, f)
-    robo = Robo.new(id: id, x: x, y: y, f: f)
-    add_robo(robo)
-    robo
+    robot = Robot.new(id: id, x: x, y: y, f: f)
+    add_robo(robot)
+    robot
   end
 
   private
 
-  def add_robo(robo)
-    raise ArgumentError, 'element must be instances of Robo' unless robo.is_a?(Robo)
+  def add_robo(robot)
+    raise ArgumentError, 'element must be instances of Robot' unless robot.is_a?(Robot)
 
-    create(robo)
+    create(robot)
   end
 
-  def turn_robot(robo, direction)
-    current_index = @directions.index(robo.f)
+  def turn_robot(robot, direction)
+    current_index = @directions.index(robot.f)
     new_index = if direction == 'LEFT'
                   current_index - 1
                 elsif direction == 'RIGHT'
                   current_index + 1
                 end
 
-    robo&.f = @directions[new_index % @directions.size]
-    robo.to_hash
+    robot&.f = @directions[new_index % @directions.size]
+    robot.to_hash
   end
 end

@@ -5,20 +5,20 @@ class GameChannel < ApplicationCable::Channel
     @commander = CommandProcessorService.new(@board)
 
     @connection_id = params[:id]
-    @robo = nil
+    @robot = nil
   end
 
   def unsubscribed
-    return unless @robo
+    return unless @robot
 
-    @board.remove(@robo.id)
+    @board.remove(@robot.id)
   end
 
   def receive(data)
     message = data['message']        
-    output = @commander.call(@connection_id, message.strip, @robo).data
+    output = @commander.call(@connection_id, message.strip, @robot).data
     ActionCable.server.broadcast('game_channel', output: output)
 
-    @robo = Robo.get(@connection_id) if @robo.nil?
+    @robot = Robot.get(@connection_id) if @robot.nil?
   end
 end

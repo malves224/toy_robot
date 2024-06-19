@@ -1,4 +1,4 @@
-class Robo < RedisApplication
+class Robot < RedisApplication
   attr_accessor :id
   attr_reader :x, :y, :f
 
