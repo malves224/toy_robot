@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:6.2
+    ports:
+      - "6379:6379"
+
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+      - "5001:5001"
+    depends_on:
+      - redis
+    environment:
+      REDIS_URL: redis://redis:6379/1
+  robo_front:
+    image: malves224/toy_robot_front:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      - VUE_APP_BACKEND_URL=localhost:3000
