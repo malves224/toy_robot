@@ -21,7 +21,7 @@ class CommandProcessorService
     params = message.split(' ')[1..]
     x = params[0].to_i
     y = params[1].to_i
-    f = params[2]
+    f = params[2] || 'SOUTH'
     robot = @board.place(connection_id, x, y, f)
     robot ? robot.to_json : 'Failed to place robot on the board.'
   end
